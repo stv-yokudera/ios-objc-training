@@ -1,0 +1,13 @@
+use_frameworks!
+platform :ios, '9.0'
+
+target 'ios-objc-training-2.4.2' do
+
+  pod 'AFNetworking', '3.1.0'
+
+  target 'ios-objc-training-2.4.2Tests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
