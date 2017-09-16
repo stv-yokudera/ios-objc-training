@@ -10,8 +10,9 @@
 #import "Forecast.h"
 
 @interface WeatherHacksAPIResponse : NSObject
-@property (nonatomic) NSMutableArray<Forecast *> *forecasts;
-@property (nonatomic) NSString *text;
+@property (nonatomic, readonly) NSMutableArray<Forecast *> *forecasts;
+@property (nonatomic, readonly) NSString *title;
+@property (nonatomic, readonly) NSString *text;
 
 - (instancetype)initWithResponseObject:(NSDictionary<NSString *, id> *)responseObject;
 @end

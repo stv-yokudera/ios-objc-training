@@ -8,6 +8,12 @@
 
 #import "WeatherHacksAPIResponse.h"
 
+@interface WeatherHacksAPIResponse()
+@property (nonatomic, readwrite) NSMutableArray<Forecast *> *forecasts;
+@property (nonatomic, readwrite) NSString *title;
+@property (nonatomic, readwrite) NSString *text;
+@end
+
 @implementation WeatherHacksAPIResponse
 
 #pragma mark - initializer
@@ -24,6 +30,7 @@
             forecast.imageURL = [NSURL URLWithString:forecastDic[@"image"][@"url"]];
             [self.forecasts addObject:forecast];
         }
+        self.title = responseObject[@"title"];
         self.text = responseObject[@"description"][@"text"];
     }
     return self;

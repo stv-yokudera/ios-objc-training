@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  ios-objc-training-2.4.2
+
+  Created by OkuderaYuki on 2017/09/16.
+  Copyright © 2017年 YukiOkudera. All rights reserved.
+*/
+
+// MARK: - WeatherViewController
+"Weather_Summary" = "[天気概況文]\n\n%@";

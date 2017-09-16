@@ -30,6 +30,8 @@ static NSString *const baseUrlString = @"http://weather.livedoor.com/forecast/we
 
 - (void)load {
     
+    NSLog(@"%@ [LINE: %d] %s", [self class], __LINE__, __FUNCTION__);
+    
     __weak typeof(self) wself = self;
     [APIClient getRequest:baseUrlString parameters:[self parameters] success:^(id responseObject) {
         NSLog(@"%@", responseObject);
@@ -49,6 +51,9 @@ static NSString *const baseUrlString = @"http://weather.livedoor.com/forecast/we
  @return リクエストパラメータ(NSDictionary<NSString *, NSString *> *)
  */
 - (NSDictionary<NSString *, NSString *> *)parameters {
+    
+    NSLog(@"%@ [LINE: %d] %s", [self class], __LINE__, __FUNCTION__);
+    
     return @{
              @"city": @(self.cityId).stringValue
              };

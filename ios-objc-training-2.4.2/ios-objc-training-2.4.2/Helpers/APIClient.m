@@ -16,6 +16,8 @@
            success:(void (^)(id responseObject))success
            failure:(void (^)(NSError *error))failure {
     
+    NSLog(@"%@ [LINE: %d] %s", [self class], __LINE__, __FUNCTION__);
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager GET:urlString
       parameters:parameters

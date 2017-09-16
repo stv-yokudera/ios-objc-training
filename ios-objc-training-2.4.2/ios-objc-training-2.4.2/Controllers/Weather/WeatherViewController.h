@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  WeatherViewController.h
 //  ios-objc-training-2.4.2
 //
 //  Created by OkuderaYuki on 2017/09/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface WeatherViewController : UIViewController
 
 @end

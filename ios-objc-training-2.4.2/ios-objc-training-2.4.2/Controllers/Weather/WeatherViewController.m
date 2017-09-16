@@ -1,5 +1,5 @@
 //
-//  ViewController.m
+//  WeatherViewController.m
 //  ios-objc-training-2.4.2
 //
 //  Created by OkuderaYuki on 2017/09/15.
@@ -8,28 +8,33 @@
 
 #import "Forecast.h"
 #import "ForecastCell.h"
-#import "ViewController.h"
 #import "WeatherHacksAPI.h"
+#import "WeatherViewController.h"
 
-@interface ViewController () <WeatherHacksAPIDelegate>
+@interface WeatherViewController () <WeatherHacksAPIDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (nonatomic) WeatherHacksAPI *weatherHacksAPI;
 @property (nonatomic) NSArray<Forecast *> *forecasts;
+@property (nonatomic) NSString *sectionTitle;
 @end
 
-@implementation ViewController
+@implementation WeatherViewController
 
 #pragma mark - life cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"%@ [LINE: %d] %s", [self class], __LINE__, __FUNCTION__);
     [self setup];
 }
 
 #pragma mark - private methods
 
 - (void)setup {
+    NSLog(@"%@ [LINE: %d] %s", [self class], __LINE__, __FUNCTION__);
+    
     self.weatherHacksAPI = [[WeatherHacksAPI alloc] initWithCityId:130010];
     self.weatherHacksAPI.delegate = self;
     [self.weatherHacksAPI load];
@@ -38,10 +43,14 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSLog(@"%@ [LINE: %d] %s", [self class], __LINE__, __FUNCTION__);
+    
     return self.forecasts.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%@ [LINE: %d] %s", [self class], __LINE__, __FUNCTION__);
+    
     ForecastCell *cell = (ForecastCell *)[tableView dequeueReusableCellWithIdentifier:[ForecastCell identifier]
                                                                          forIndexPath:indexPath];
     
@@ -63,18 +72,29 @@
     return cell;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    NSLog(@"%@ [LINE: %d] %s", [self class], __LINE__, __FUNCTION__);
+    
+    return self.sectionTitle;
+}
+
 #pragma mark - WeatherHacksAPIDelegate
 
 - (void)didSuccess:(WeatherHacksAPIResponse *)response {
-    NSLog(@"forecasts: %@", response.forecasts);
-    NSLog(@"text: %@", response.text);
+    NSLog(@"%@ [LINE: %d] %s", [self class], __LINE__, __FUNCTION__);
     
+    NSString *weatherSummary = NSLocalizedString(@"Weather_Summary", nil);
+    self.textView.text = [NSString stringWithFormat:weatherSummary, response.text];
+    
+    self.sectionTitle = response.title;
     self.forecasts = response.forecasts;
     [self.tableView reloadData];
-    self.textView.text = response.text;
+    
 }
 
 - (void)didFailure:(NSError *)error {
+    NSLog(@"%@ [LINE: %d] %s", [self class], __LINE__, __FUNCTION__);
+    
     NSLog(@"error: %@", error);
 }
 
